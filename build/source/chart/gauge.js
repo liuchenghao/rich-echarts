@@ -1,4 +1,4 @@
-define('echarts/chart/gauge', [
+define('rich-echarts/chart/gauge', [
     'require',
     './base',
     '../util/shape/GaugePointer',
@@ -524,7 +524,7 @@ define('echarts/chart/gauge', [
     zrUtil.inherits(Gauge, ChartBase);
     require('../chart').define('gauge', Gauge);
     return Gauge;
-});define('echarts/util/shape/GaugePointer', [
+});define('rich-echarts/util/shape/GaugePointer', [
     'require',
     'zrender/shape/Base',
     'zrender/tool/util',

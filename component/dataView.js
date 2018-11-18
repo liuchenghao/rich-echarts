@@ -1,7 +1,7 @@
 /**
- * echarts组件：提示框
+ * rich-echarts组件：提示框
  *
- * @desc echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
+ * @desc rich-echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
  * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *
  */
@@ -34,7 +34,7 @@ define(function (require) {
         this._zrHeight = zr.getHeight();
         this._zrWidth = zr.getWidth();
     
-        this._tDom.className = 'echarts-dataview';
+        this._tDom.className = 'rich-echarts-dataview';
         this.hide();
         this.dom.firstChild.appendChild(this._tDom);
 

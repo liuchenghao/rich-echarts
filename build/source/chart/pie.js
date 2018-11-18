@@ -1,4 +1,4 @@
-define('echarts/chart/pie', [
+define('rich-echarts/chart/pie', [
     'require',
     './base',
     'zrender/shape/Text',

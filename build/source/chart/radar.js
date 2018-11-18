@@ -1,4 +1,4 @@
-define('echarts/chart/radar', [
+define('rich-echarts/chart/radar', [
     'require',
     './base',
     'zrender/shape/Polygon',
@@ -248,7 +248,7 @@ define('echarts/chart/radar', [
     zrUtil.inherits(Radar, ChartBase);
     require('../chart').define('radar', Radar);
     return Radar;
-});define('echarts/component/polar', [
+});define('rich-echarts/component/polar', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -918,7 +918,7 @@ define('echarts/chart/radar', [
     zrUtil.inherits(Polar, Base);
     require('../component').define('polar', Polar);
     return Polar;
-});define('echarts/util/coordinates', [
+});define('rich-echarts/util/coordinates', [
     'require',
     'zrender/tool/math'
 ], function (require) {

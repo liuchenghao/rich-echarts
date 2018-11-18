@@ -1,4 +1,4 @@
-define('echarts/chart/scatter', [
+define('rich-echarts/chart/scatter', [
     'require',
     './base',
     '../util/shape/Symbol',
@@ -347,7 +347,7 @@ define('echarts/chart/scatter', [
     zrUtil.inherits(Scatter, ChartBase);
     require('../chart').define('scatter', Scatter);
     return Scatter;
-});define('echarts/component/dataRange', [
+});define('rich-echarts/component/dataRange', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -1554,7 +1554,7 @@ define('echarts/chart/scatter', [
     zrUtil.inherits(DataRange, Base);
     require('../component').define('dataRange', DataRange);
     return DataRange;
-});define('echarts/util/shape/HandlePolygon', [
+});define('rich-echarts/util/shape/HandlePolygon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/Polygon',

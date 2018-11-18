@@ -1,7 +1,7 @@
 /**
- * echarts图表基类
+ * rich-echarts图表基类
  *
- * @desc echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
+ * @desc rich-echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
  * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *
  */
@@ -1409,7 +1409,7 @@ define(function (require) {
                     }
                     else {
                         key += lastShapeList[i].type;
-                        // https://github.com/ecomfe/echarts/issues/1219#issuecomment-71987602
+                        // https://github.com/ecomfe/rich-echarts/issues/1219#issuecomment-71987602
                         // 响应中断可能产生的重复元素
                         if (oldMap[key]) {
                             this.zr.delShape(lastShapeList[i].id);

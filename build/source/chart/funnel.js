@@ -1,4 +1,4 @@
-define('echarts/chart/funnel', [
+define('rich-echarts/chart/funnel', [
     'require',
     './base',
     'zrender/shape/Text',

@@ -1,7 +1,7 @@
 /**
- * echarts组件：提示框
+ * rich-echarts组件：提示框
  *
- * @desc echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
+ * @desc rich-echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
  * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *
  */
@@ -72,7 +72,7 @@ define(function (require) {
      * @param {ZRender} zr zrender实例
      * @param {Object} option 提示框参数
      * @param {HtmlElement} dom 目标对象
-     * @param {ECharts} myChart 当前图表实例
+     * @param {rich-echarts} myChart 当前图表实例
      */
     function Tooltip(ecTheme, messageCenter, zr, option, myChart) {
         Base.call(this, ecTheme, messageCenter, zr, option, myChart);

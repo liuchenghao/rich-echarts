@@ -1,7 +1,7 @@
 {
   "name": "rich-echarts",
   "description": "Enterprise Charts，基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据可视化表。",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "maintainers": [
       { "name": "Kener", "email": "kener.linfeng@gmail.com" },
       { "name": "Pissang", "email": "shenyi.914@gmail.com" },
@@ -18,6 +18,6 @@
     "gulp-replace": "^0.5.4"
   },
   "repository": "git://github.com/ecomfe/echarts",
-  "main": "echarts",
+  "main": "rich-echarts",
   "homepage": "http://echarts.baidu.com"
 }

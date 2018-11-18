@@ -1,4 +1,4 @@
-define('echarts/chart/line', [
+define('rich-echarts/chart/line', [
     'require',
     './base',
     'zrender/shape/Polyline',
@@ -770,7 +770,7 @@ define('echarts/chart/line', [
     zrUtil.inherits(Line, ChartBase);
     require('../chart').define('line', Line);
     return Line;
-});define('echarts/util/shape/HalfSmoothPolygon', [
+});define('rich-echarts/util/shape/HalfSmoothPolygon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/util/smoothBezier',

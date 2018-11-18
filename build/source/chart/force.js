@@ -1,4 +1,4 @@
-define('echarts/chart/force', [
+define('rich-echarts/chart/force', [
     'require',
     './base',
     '../data/Graph',
@@ -655,7 +655,7 @@ define('echarts/chart/force', [
     zrUtil.inherits(Force, ChartBase);
     require('../chart').define('force', Force);
     return Force;
-});define('echarts/data/Graph', [
+});define('rich-echarts/data/Graph', [
     'require',
     'zrender/tool/util'
 ], function (require) {
@@ -915,7 +915,7 @@ define('echarts/chart/force', [
         return graph;
     };
     return Graph;
-});define('echarts/layout/Force', [
+});define('rich-echarts/layout/Force', [
     'require',
     './forceLayoutWorker',
     'zrender/tool/vector'
@@ -1112,7 +1112,7 @@ define('echarts/chart/force', [
         this._layout = null;
     };
     return ForceLayout;
-});define('echarts/layout/forceLayoutWorker', [
+});define('rich-echarts/layout/forceLayoutWorker', [
     'require',
     'zrender/tool/vector'
 ], function __echartsForceLayoutWorker(require) {

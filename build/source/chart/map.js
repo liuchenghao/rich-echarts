@@ -1,4 +1,4 @@
-define('echarts/chart/map', [
+define('rich-echarts/chart/map', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -1604,7 +1604,7 @@ define('echarts/chart/map', [
     };
     require('../tool/util').inherits(Ellipse, Base);
     return Ellipse;
-});define('echarts/component/dataRange', [
+});define('rich-echarts/component/dataRange', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -2811,7 +2811,7 @@ define('echarts/chart/map', [
     zrUtil.inherits(DataRange, Base);
     require('../component').define('dataRange', DataRange);
     return DataRange;
-});define('echarts/component/roamController', [
+});define('rich-echarts/component/roamController', [
     'require',
     './base',
     'zrender/shape/Rectangle',
@@ -3106,7 +3106,7 @@ define('echarts/chart/map', [
     zrUtil.inherits(RoamController, Base);
     require('../component').define('roamController', RoamController);
     return RoamController;
-});define('echarts/util/mapData/params', ['require'], function (require) {
+});define('rich-echarts/util/mapData/params', ['require'], function (require) {
     function decode(json) {
         if (!json.UTF8Encoding) {
             return json;
@@ -3753,7 +3753,7 @@ define('echarts/chart/map', [
         decode: decode,
         params: mapParams
     };
-});define('echarts/util/mapData/textFixed', [], function () {
+});define('rich-echarts/util/mapData/textFixed', [], function () {
     return {
         '广东': [
             0,
@@ -3816,7 +3816,7 @@ define('echarts/chart/map', [
             20
         ]
     };
-});define('echarts/util/mapData/geoCoord', [], function () {
+});define('rich-echarts/util/mapData/geoCoord', [], function () {
     return {
         'Russia': [
             100,
@@ -3827,7 +3827,7 @@ define('echarts/chart/map', [
             38
         ]
     };
-});define('echarts/util/projection/svg', [
+});define('rich-echarts/util/projection/svg', [
     'require',
     'zrender/shape/Path'
 ], function (require) {
@@ -4062,7 +4062,7 @@ define('echarts/chart/map', [
         pos2geo: pos2geo,
         geo2pos: geo2pos
     };
-});define('echarts/util/projection/normal', [], function () {
+});define('rich-echarts/util/projection/normal', [], function () {
     function getBbox(json, specialArea) {
         specialArea = specialArea || {};
         if (!json.srcSize) {
@@ -4323,7 +4323,7 @@ define('echarts/chart/map', [
         pos2geo: pos2geo,
         geo2pos: geo2pos
     };
-});define('echarts/util/shape/HandlePolygon', [
+});define('rich-echarts/util/shape/HandlePolygon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/Polygon',
@@ -4354,7 +4354,7 @@ define('echarts/chart/map', [
     };
     zrUtil.inherits(HandlePolygon, Base);
     return HandlePolygon;
-});define('echarts/util/mapData/geoJson/an_hui_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/an_hui_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -4728,7 +4728,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/ao_men_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/ao_men_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [{
@@ -4753,7 +4753,7 @@ define('echarts/chart/map', [
             }],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/bei_jing_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/bei_jing_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -5138,7 +5138,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/china_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/china_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -5843,7 +5843,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/chong_qing_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/chong_qing_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -6650,7 +6650,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/fu_jian_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/fu_jian_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -6837,7 +6837,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/gan_su_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/gan_su_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -7142,7 +7142,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/guang_dong_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/guang_dong_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -7578,7 +7578,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/guang_xi_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/guang_xi_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -7865,7 +7865,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/gui_zhou_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/gui_zhou_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -8097,7 +8097,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hai_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hai_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -8464,7 +8464,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hei_long_jiang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hei_long_jiang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -8731,7 +8731,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/he_bei_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/he_bei_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -8967,7 +8967,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/he_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/he_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -9314,7 +9314,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hu_bei_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hu_bei_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -9679,7 +9679,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hu_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hu_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -9975,7 +9975,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/jiang_su_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/jiang_su_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -10242,7 +10242,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/jiang_xi_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/jiang_xi_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -10469,7 +10469,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/ji_lin_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/ji_lin_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -10656,7 +10656,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/liao_ning_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/liao_ning_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -10943,7 +10943,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/nei_meng_gu_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/nei_meng_gu_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -11190,7 +11190,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/ning_xia_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/ning_xia_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -11306,7 +11306,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/qing_hai_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/qing_hai_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -11482,7 +11482,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shang_hai_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shang_hai_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -11869,7 +11869,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shan_dong_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shan_dong_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -12216,7 +12216,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shan_xi_1_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shan_xi_1_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -12423,7 +12423,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shan_xi_2_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shan_xi_2_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -12650,7 +12650,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/si_chuan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/si_chuan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -13077,7 +13077,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/tai_wan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/tai_wan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [{
@@ -13102,7 +13102,7 @@ define('echarts/chart/map', [
             }],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/tian_jin_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/tian_jin_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -13469,7 +13469,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/world_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/world_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'offset': {
@@ -16412,7 +16412,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/xiang_gang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/xiang_gang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [{
@@ -16437,7 +16437,7 @@ define('echarts/chart/map', [
             }],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/xin_jiang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/xin_jiang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -16858,7 +16858,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/xi_zang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/xi_zang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -17005,7 +17005,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/yun_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/yun_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -17332,7 +17332,7 @@ define('echarts/chart/map', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/zhe_jiang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/zhe_jiang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [

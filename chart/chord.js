@@ -1,5 +1,5 @@
 /**
- * echarts图表类：chord diagram
+ * rich-echarts图表类：chord diagram
  *
  * @author pissang (https://github.com/pissang/)
  * 

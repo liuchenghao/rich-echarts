@@ -1,13 +1,13 @@
 /**
  * Tree data structure
  * 
- * @module echarts/data/Tree
+ * @module rich-echarts/data/Tree
  * @author Yi Shen(https://www.github.com/pissang)
  */
 define(function(require) {
 
     /**
-     * @constructor module:echarts/data/Tree~TreeNode
+     * @constructor module:rich-echarts/data/Tree~TreeNode
      * @param {string} id Node ID
      */
     function TreeNode(id) {
@@ -24,7 +24,7 @@ define(function(require) {
          */
         this.height = 0;
         /**
-         * @type {Array.<module:echarts/data/Tree~TreeNode>}
+         * @type {Array.<module:rich-echarts/data/Tree~TreeNode>}
          */
         this.children = [];
     }
@@ -64,12 +64,12 @@ define(function(require) {
 
     /**
      * @constructor
-     * @alias module:echarts/data/Tree
+     * @alias module:rich-echarts/data/Tree
      * @param {string} id
      */
     function Tree(id) {
         /**
-         * @type {module:echarts/data/Tree~TreeNode}
+         * @type {module:rich-echarts/data/Tree~TreeNode}
          */
         this.root = new TreeNode(id);
     }

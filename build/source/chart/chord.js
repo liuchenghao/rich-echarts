@@ -1,4 +1,4 @@
-define('echarts/chart/chord', [
+define('rich-echarts/chart/chord', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -834,7 +834,7 @@ define('echarts/chart/chord', [
     zrUtil.inherits(Chord, ChartBase);
     require('../chart').define('chord', Chord);
     return Chord;
-});define('echarts/util/shape/Ribbon', [
+});define('rich-echarts/util/shape/Ribbon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/util/PathProxy',
@@ -897,7 +897,7 @@ define('echarts/chart/chord', [
     };
     zrUtil.inherits(RibbonShape, Base);
     return RibbonShape;
-});define('echarts/data/Graph', [
+});define('rich-echarts/data/Graph', [
     'require',
     'zrender/tool/util'
 ], function (require) {
@@ -1157,7 +1157,7 @@ define('echarts/chart/chord', [
         return graph;
     };
     return Graph;
-});define('echarts/layout/Chord', ['require'], function (require) {
+});define('rich-echarts/layout/Chord', ['require'], function (require) {
     var ChordLayout = function (opts) {
         opts = opts || {};
         this.sort = opts.sort || null;

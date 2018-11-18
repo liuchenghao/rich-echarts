@@ -1,7 +1,7 @@
 /**
- * echarts组件：工具箱
+ * rich-echarts组件：工具箱
  *
- * @desc echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
+ * @desc rich-echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
  * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *
  */
@@ -118,7 +118,7 @@ define(function (require) {
      * @param {Object} messageCenter echart消息中心
      * @param {ZRender} zr zrender实例
      * @param {HtmlElement} dom 目标对象
-     * @param {ECharts} myChart 当前图表实例
+     * @param {rich-echarts} myChart 当前图表实例
      */
     function Toolbox(ecTheme, messageCenter, zr, option, myChart) {
         Base.call(this, ecTheme, messageCenter, zr, option, myChart);
@@ -876,7 +876,7 @@ define(function (require) {
             }
              
             var downloadDiv = document.createElement('div');
-            downloadDiv.id = '__echarts_download_wrap__';
+            downloadDiv.id = '__rich-echarts_download_wrap__';
             downloadDiv.style.cssText = 'position:fixed;'
                 + 'z-index:99999;'
                 + 'display:block;'
@@ -897,7 +897,7 @@ define(function (require) {
                  ? saveOption.name 
                  : (this.option.title && (this.option.title.text || this.option.title.subtext))
                    ? (this.option.title.text || this.option.title.subtext)
-                   : 'ECharts')
+                   : 'rich-echarts')
                 + '.' + imgType 
             );
             downloadLink.innerHTML = '<img style="vertical-align:middle" src="' + image 
@@ -913,11 +913,11 @@ define(function (require) {
             downloadDiv = null;
             
             setTimeout(function (){
-                var _d = document.getElementById('__echarts_download_wrap__');
+                var _d = document.getElementById('__rich-echarts_download_wrap__');
                 if (_d) {
                     _d.onclick = function () {
                         var d = document.getElementById(
-                            '__echarts_download_wrap__'
+                            '__rich-echarts_download_wrap__'
                         );
                         d.onclick = null;
                         d.innerHTML = '';
@@ -1127,7 +1127,7 @@ define(function (require) {
                 for (var i = 0, l = this.option.series.length; i < l; i++) {
                     if (this._magicType[_MAGICTYPE_STACK]) {
                         // 启用堆积
-                        this.option.series[i].stack = '_ECHARTS_STACK_KENER_2014_';
+                        this.option.series[i].stack = '_rich-echarts_STACK_KENER_2014_';
                         chartType = _MAGICTYPE_STACK;
                     }
                     else if (this._magicType[_MAGICTYPE_TILED]) {

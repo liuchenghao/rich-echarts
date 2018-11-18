@@ -1,5 +1,5 @@
 /**
- * echarts图表类：力导向图
+ * rich-echarts图表类：力导向图
  *
  * @author pissang (https://github.com/pissang/)
  *

@@ -1,4 +1,4 @@
-define('echarts/chart/eventRiver', [
+define('rich-echarts/chart/eventRiver', [
     'require',
     './base',
     '../layout/eventRiver',
@@ -217,7 +217,7 @@ define('echarts/chart/eventRiver', [
     zrUtil.inherits(EventRiver, ChartBase);
     require('../chart').define('eventRiver', EventRiver);
     return EventRiver;
-});define('echarts/layout/eventRiver', ['require'], function (require) {
+});define('rich-echarts/layout/eventRiver', ['require'], function (require) {
     function eventRiverLayout(series, intervalX, area) {
         var space = 5;
         var scale = intervalX;

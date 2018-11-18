@@ -1,4 +1,4 @@
-define('echarts/chart/bar', [
+define('rich-echarts/chart/bar', [
     'require',
     './base',
     'zrender/shape/Rectangle',

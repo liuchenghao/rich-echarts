@@ -1,5 +1,5 @@
 /*!
- * ECharts, a javascript interactive chart library.
+ * rich-echarts, a javascript interactive chart library.
  *  
  * Copyright (c) 2015, Baidu Inc.
  * All rights reserved.
@@ -9,9 +9,9 @@
  */
 
 /**
- * echarts
+ * rich-echarts
  *
- * @desc echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
+ * @desc rich-echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
  * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *
  */
@@ -24,7 +24,7 @@ define(function (require) {
     
     var _canvasSupported = require('zrenderjs/tool/env').canvasSupported;
     var _idBase = new Date() - 0;
-    var _instances = {};    // ECharts实例map索引
+    var _instances = {};    // rich-echarts实例map索引
     var DOM_ATTRIBUTE_KEY = '_echarts_instance_';
     
     self.version = '2.2.1';
@@ -47,7 +47,7 @@ define(function (require) {
             
         dom = dom instanceof Array ? dom[0] : dom;
 
-        // dom与echarts实例映射索引
+        // dom与rich-echarts实例映射索引
         var key = dom.getAttribute(DOM_ATTRIBUTE_KEY);
         if (!key) {
             key = _idBase++;

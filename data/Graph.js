@@ -1,7 +1,7 @@
 /**
  * Graph data structure
  * 
- * @module echarts/data/Graph
+ * @module rich-echarts/data/Graph
  * @author Yi Shen(https://www.github.com/pissang)
  */
 define(function(require) {
@@ -11,7 +11,7 @@ define(function(require) {
     'use strict';
 
     /**
-     * @alias module:echarts/data/Graph
+     * @alias module:rich-echarts/data/Graph
      * @constructor
      * @param {boolean} directed
      */
@@ -62,7 +62,7 @@ define(function(require) {
     /**
      * 获取节点
      * @param  {string} id
-     * @return {module:echarts/data/Graph~Node}
+     * @return {module:rich-echarts/data/Graph~Node}
      */
     Graph.prototype.getNodeById = function (id) {
         return this._nodesMap[id];
@@ -70,10 +70,10 @@ define(function(require) {
 
     /**
      * 添加边
-     * @param {string|module:echarts/data/Graph~Node} n1
-     * @param {string|module:echarts/data/Graph~Node} n2
+     * @param {string|module:rich-echarts/data/Graph~Node} n1
+     * @param {string|module:rich-echarts/data/Graph~Node} n2
      * @param {*} data
-     * @return {module:echarts/data/Graph~Edge}
+     * @return {module:rich-echarts/data/Graph~Edge}
      */
     Graph.prototype.addEdge = function (n1, n2, data) {
         if (typeof(n1) == 'string') {
@@ -110,7 +110,7 @@ define(function(require) {
 
     /**
      * 移除边
-     * @param  {module:echarts/data/Graph~Edge} edge
+     * @param  {module:rich-echarts/data/Graph~Edge} edge
      */
     Graph.prototype.removeEdge = function (edge) {
         var n1 = edge.node1;
@@ -131,9 +131,9 @@ define(function(require) {
 
     /**
      * 获取边
-     * @param  {module:echarts/data/Graph~Node|string} n1
-     * @param  {module:echarts/data/Graph~Node|string} n2
-     * @return {module:echarts/data/Graph~Edge}
+     * @param  {module:rich-echarts/data/Graph~Node|string} n1
+     * @param  {module:rich-echarts/data/Graph~Node|string} n2
+     * @return {module:rich-echarts/data/Graph~Edge}
      */
     Graph.prototype.getEdge = function (n1, n2) {
         if (typeof(n1) !== 'string') {
@@ -153,7 +153,7 @@ define(function(require) {
 
     /**
      * 移除节点（及其邻接边）
-     * @param  {module:echarts/data/Graph~Node|string} node
+     * @param  {module:rich-echarts/data/Graph~Node|string} node
      */
     Graph.prototype.removeNode = function (node) {
         if (typeof(node) === 'string') {
@@ -252,7 +252,7 @@ define(function(require) {
     /**
      * 广度优先遍历
      * @param {Function} cb
-     * @param {module:echarts/data/Graph~Node} startNode 遍历起始节点
+     * @param {module:rich-echarts/data/Graph~Node} startNode 遍历起始节点
      * @param {string} [direction=none] none, in, out 指定遍历边
      * @param {*} [context] 回调函数调用context
      */
@@ -319,7 +319,7 @@ define(function(require) {
 
     /**
      * 图节点
-     * @alias module:echarts/data/Graph~Node
+     * @alias module:rich-echarts/data/Graph~Node
      * @param {string} id
      * @param {*} [data]
      */
@@ -336,17 +336,17 @@ define(function(require) {
         this.data = data || null;
         /**
          * 入边，只在有向图上有效
-         * @type {Array.<module:echarts/data/Graph~Edge>}
+         * @type {Array.<module:rich-echarts/data/Graph~Edge>}
          */
         this.inEdges = [];
         /**
          * 出边，只在有向图上有效
-         * @type {Array.<module:echarts/data/Graph~Edge>}
+         * @type {Array.<module:rich-echarts/data/Graph~Edge>}
          */
         this.outEdges = [];
         /**
          * 邻接边
-         * @type {Array.<module:echarts/data/Graph~Edge>}
+         * @type {Array.<module:rich-echarts/data/Graph~Edge>}
          */
         this.edges = [];
     };
@@ -377,20 +377,20 @@ define(function(require) {
 
     /**
      * 图边
-     * @alias module:echarts/data/Graph~Edge
-     * @param {module:echarts/data/Graph~Node} node1
-     * @param {module:echarts/data/Graph~Node} node2
+     * @alias module:rich-echarts/data/Graph~Edge
+     * @param {module:rich-echarts/data/Graph~Node} node1
+     * @param {module:rich-echarts/data/Graph~Node} node2
      * @param {extra} data
      */
     var Edge = function(node1, node2, data) {
         /**
          * 节点1，如果是有向图则为源节点
-         * @type {module:echarts/data/Graph~Node}
+         * @type {module:rich-echarts/data/Graph~Node}
          */
         this.node1 = node1;
         /**
          * 节点2，如果是有向图则为目标节点
-         * @type {module:echarts/data/Graph~Node}
+         * @type {module:rich-echarts/data/Graph~Node}
          */
         this.node2 = node2;
 
@@ -420,11 +420,11 @@ define(function(require) {
      * 计算每一列的和写到`node.data.inValue`。
      * 边的权重会被然后写到`edge.data.weight`。
      * 
-     * @method module:echarts/data/Graph.fromMatrix
+     * @method module:rich-echarts/data/Graph.fromMatrix
      * @param {Array.<Object>} nodesData 节点信息，必须有`id`属性, 会保存到`node.data`中
      * @param {Array} matrix 邻接矩阵
      * @param {boolean} directed 是否是有向图
-     * @return {module:echarts/data/Graph}
+     * @return {module:rich-echarts/data/Graph}
      */
     Graph.fromMatrix = function(nodesData, matrix, directed) {
         if (

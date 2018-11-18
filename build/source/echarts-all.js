@@ -126,8 +126,8 @@ var require, define;
         return mod.exports;
     }
 }());
-define('echarts', ['echarts/echarts'], function (main) {return main;});
-define('echarts/echarts', [
+define('rich-echarts', ['rich-echarts/rich-echarts'], function (main) {return main;});
+define('rich-echarts/rich-echarts', [
     'require',
     './config',
     'zrender/tool/util',
@@ -162,13 +162,13 @@ define('echarts/echarts', [
     var _canvasSupported = require('zrender/tool/env').canvasSupported;
     var _idBase = new Date() - 0;
     var _instances = {};
-    var DOM_ATTRIBUTE_KEY = '_echarts_instance_';
+    var DOM_ATTRIBUTE_KEY = '_rich-echarts_instance_';
     self.version = '2.2.1';
     self.dependencies = { zrender: '2.0.8' };
     self.init = function (dom, theme) {
         var zrender = require('zrender');
         if (zrender.version.replace('.', '') - 0 < self.dependencies.zrender.replace('.', '') - 0) {
-            console.error('ZRender ' + zrender.version + ' is too old for ECharts ' + self.version + '. Current version need ZRender ' + self.dependencies.zrender + '+');
+            console.error('ZRender ' + zrender.version + ' is too old for rich-echarts ' + self.version + '. Current version need ZRender ' + self.dependencies.zrender + '+');
         }
         dom = dom instanceof Array ? dom[0] : dom;
         var key = dom.getAttribute(DOM_ATTRIBUTE_KEY);
@@ -179,7 +179,7 @@ define('echarts/echarts', [
         if (_instances[key]) {
             _instances[key].dispose();
         }
-        _instances[key] = new Echarts(dom);
+        _instances[key] = new rich-echarts(dom);
         _instances[key].id = key;
         _instances[key].canvasSupported = _canvasSupported;
         _instances[key].setTheme(theme);
@@ -192,7 +192,7 @@ define('echarts/echarts', [
         zrEvent.Dispatcher.call(this);
     }
     zrUtil.merge(MessageCenter.prototype, zrEvent.Dispatcher.prototype, true);
-    function Echarts(dom) {
+    function rich-echarts(dom) {
         dom.innerHTML = '';
         this._themeConfig = {};
         this.dom = dom;
@@ -232,7 +232,7 @@ define('echarts/echarts', [
             }
         }
     }
-    Echarts.prototype = {
+    rich-echarts.prototype = {
         _init: function () {
             var self = this;
             var _zr = require('zrender').init(this.dom);
@@ -285,8 +285,8 @@ define('echarts/echarts', [
             }
         },
         __onevent: function (param) {
-            param.__echartsId = param.__echartsId || this.id;
-            var fromMyself = param.__echartsId === this.id;
+            param.__rich-echartsId = param.__rich-echartsId || this.id;
+            var fromMyself = param.__rich-echartsId === this.id;
             if (!this._curEventType) {
                 this._curEventType = param.type;
             }
@@ -977,7 +977,7 @@ define('echarts/echarts', [
             var title = this._optionRestore.title;
             var imgDom = document.createElement('img');
             imgDom.src = this.getDataURL(imgType);
-            imgDom.title = title && title.text || 'ECharts';
+            imgDom.title = title && title.text || 'rich-echarts';
             return imgDom;
         },
         getConnectedDataURL: function (imgType) {
@@ -1046,7 +1046,7 @@ define('echarts/echarts', [
             var title = this._optionRestore.title;
             var imgDom = document.createElement('img');
             imgDom.src = this.getConnectedDataURL(imgType);
-            imgDom.title = title && title.text || 'ECharts';
+            imgDom.title = title && title.text || 'rich-echarts';
             return imgDom;
         },
         on: function (eventName, eventListener) {
@@ -1091,7 +1091,7 @@ define('echarts/echarts', [
             return this;
         },
         connectedEventHandler: function (param) {
-            if (param.__echartsId != this.id) {
+            if (param.__rich-echartsId != this.id) {
                 this._onevent(param);
             }
         },
@@ -1207,7 +1207,7 @@ define('echarts/echarts', [
         }
     };
     return self;
-});define('echarts/config', [], function () {
+});define('rich-echarts/config', [], function () {
     var config = {
         CHART_TYPE_LINE: 'line',
         CHART_TYPE_BAR: 'bar',
@@ -1941,7 +1941,7 @@ define('zrender/zrender', [
         devicePixelRatio: Math.max(window.devicePixelRatio || 1, 1)
     };
     return config;
-});define('echarts/chart/island', [
+});define('rich-echarts/chart/island', [
     'require',
     './base',
     'zrender/shape/Circle',
@@ -2109,7 +2109,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Island, ChartBase);
     require('../chart').define('island', Island);
     return Island;
-});define('echarts/component/toolbox', [
+});define('rich-echarts/component/toolbox', [
     'require',
     './base',
     'zrender/shape/Line',
@@ -2822,21 +2822,21 @@ define('zrender/zrender', [
                 image = this.myChart.getConnectedDataURL(imgType);
             }
             var downloadDiv = document.createElement('div');
-            downloadDiv.id = '__echarts_download_wrap__';
+            downloadDiv.id = '__rich-echarts_download_wrap__';
             downloadDiv.style.cssText = 'position:fixed;' + 'z-index:99999;' + 'display:block;' + 'top:0;left:0;' + 'background-color:rgba(33,33,33,0.5);' + 'text-align:center;' + 'width:100%;' + 'height:100%;' + 'line-height:' + document.documentElement.clientHeight + 'px;';
             var downloadLink = document.createElement('a');
             downloadLink.href = image;
-            downloadLink.setAttribute('download', (saveOption.name ? saveOption.name : this.option.title && (this.option.title.text || this.option.title.subtext) ? this.option.title.text || this.option.title.subtext : 'ECharts') + '.' + imgType);
+            downloadLink.setAttribute('download', (saveOption.name ? saveOption.name : this.option.title && (this.option.title.text || this.option.title.subtext) ? this.option.title.text || this.option.title.subtext : 'rich-echarts') + '.' + imgType);
             downloadLink.innerHTML = '<img style="vertical-align:middle" src="' + image + '" title="' + (!!window.ActiveXObject || 'ActiveXObject' in window ? '右键->图片另存为' : saveOption.lang ? saveOption.lang[0] : '点击保存') + '"/>';
             downloadDiv.appendChild(downloadLink);
             document.body.appendChild(downloadDiv);
             downloadLink = null;
             downloadDiv = null;
             setTimeout(function () {
-                var _d = document.getElementById('__echarts_download_wrap__');
+                var _d = document.getElementById('__rich-echarts_download_wrap__');
                 if (_d) {
                     _d.onclick = function () {
-                        var d = document.getElementById('__echarts_download_wrap__');
+                        var d = document.getElementById('__rich-echarts_download_wrap__');
                         d.onclick = null;
                         d.innerHTML = '';
                         document.body.removeChild(d);
@@ -2971,7 +2971,7 @@ define('zrender/zrender', [
             if (this._magicType[_MAGICTYPE_STACK] || this._magicType[_MAGICTYPE_TILED]) {
                 for (var i = 0, l = this.option.series.length; i < l; i++) {
                     if (this._magicType[_MAGICTYPE_STACK]) {
-                        this.option.series[i].stack = '_ECHARTS_STACK_KENER_2014_';
+                        this.option.series[i].stack = '_rich-echarts_STACK_KENER_2014_';
                         chartType = _MAGICTYPE_STACK;
                     } else if (this._magicType[_MAGICTYPE_TILED]) {
                         this.option.series[i].stack = null;
@@ -3051,7 +3051,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Toolbox, Base);
     require('../component').define('toolbox', Toolbox);
     return Toolbox;
-});define('echarts/component', [], function () {
+});define('rich-echarts/component', [], function () {
     var self = {};
     var _componentLibrary = {};
     self.define = function (name, clazz) {
@@ -3062,7 +3062,7 @@ define('zrender/zrender', [
         return _componentLibrary[name];
     };
     return self;
-});define('echarts/component/title', [
+});define('rich-echarts/component/title', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -3291,7 +3291,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Title, Base);
     require('../component').define('title', Title);
     return Title;
-});define('echarts/component/tooltip', [
+});define('rich-echarts/component/tooltip', [
     'require',
     './base',
     '../util/shape/Cross',
@@ -3390,7 +3390,7 @@ define('zrender/zrender', [
         this._tDom.onmouseout = function () {
             self._mousein = false;
         };
-        this._tDom.className = 'echarts-tooltip';
+        this._tDom.className = 'rich-echarts-tooltip';
         this._tDom.style.position = 'absolute';
         this.hasAppend = false;
         this._axisLineShape && this.zr.delShape(this._axisLineShape.id);
@@ -4533,7 +4533,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Tooltip, Base);
     require('../component').define('tooltip', Tooltip);
     return Tooltip;
-});define('echarts/component/legend', [
+});define('rich-echarts/component/legend', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -5216,13 +5216,13 @@ define('zrender/zrender', [
     zrUtil.inherits(Legend, Base);
     require('../component').define('legend', Legend);
     return Legend;
-});define('echarts/util/ecData', [], function () {
+});define('rich-echarts/util/ecData', [], function () {
     function pack(shape, series, seriesIndex, data, dataIndex, name, special, special2) {
         var value;
         if (typeof data != 'undefined') {
             value = data.value == null ? data : data.value;
         }
-        shape._echartsData = {
+        shape._rich-echartsData = {
             '_series': series,
             '_seriesIndex': seriesIndex,
             '_data': data,
@@ -5232,10 +5232,10 @@ define('zrender/zrender', [
             '_special': special,
             '_special2': special2
         };
-        return shape._echartsData;
+        return shape._rich-echartsData;
     }
     function get(shape, key) {
-        var data = shape._echartsData;
+        var data = shape._rich-echartsData;
         if (!key) {
             return data;
         }
@@ -5253,7 +5253,7 @@ define('zrender/zrender', [
         return null;
     }
     function set(shape, key, value) {
-        shape._echartsData = shape._echartsData || {};
+        shape._rich-echartsData = shape._rich-echartsData || {};
         switch (key) {
         case 'series':
         case 'seriesIndex':
@@ -5263,20 +5263,20 @@ define('zrender/zrender', [
         case 'value':
         case 'special':
         case 'special2':
-            shape._echartsData['_' + key] = value;
+            shape._rich-echartsData['_' + key] = value;
             break;
         }
     }
     function clone(source, target) {
-        target._echartsData = {
-            '_series': source._echartsData._series,
-            '_seriesIndex': source._echartsData._seriesIndex,
-            '_data': source._echartsData._data,
-            '_dataIndex': source._echartsData._dataIndex,
-            '_name': source._echartsData._name,
-            '_value': source._echartsData._value,
-            '_special': source._echartsData._special,
-            '_special2': source._echartsData._special2
+        target._rich-echartsData = {
+            '_series': source._rich-echartsData._series,
+            '_seriesIndex': source._rich-echartsData._seriesIndex,
+            '_data': source._rich-echartsData._data,
+            '_dataIndex': source._rich-echartsData._dataIndex,
+            '_name': source._rich-echartsData._name,
+            '_value': source._rich-echartsData._value,
+            '_special': source._rich-echartsData._special,
+            '_special2': source._rich-echartsData._special2
         };
     }
     return {
@@ -5285,7 +5285,7 @@ define('zrender/zrender', [
         get: get,
         clone: clone
     };
-});define('echarts/chart', [], function () {
+});define('rich-echarts/chart', [], function () {
     var self = {};
     var _chartLibrary = {};
     self.define = function (name, clazz) {
@@ -6095,7 +6095,7 @@ define('zrender/zrender', [
         alpha: alpha,
         getData: getData
     };
-});define('echarts/component/timeline', [
+});define('rich-echarts/component/timeline', [
     'require',
     './base',
     'zrender/shape/Rectangle',
@@ -7418,7 +7418,7 @@ define('zrender/zrender', [
         }, effectOption.timeInterval);
     };
     return Whirling;
-});define('echarts/theme/macarons', [], function () {
+});define('rich-echarts/theme/macarons', [], function () {
     var theme = {
         color: [
             '#2ec7c9',
@@ -7607,7 +7607,7 @@ define('zrender/zrender', [
         textStyle: { fontFamily: '微软雅黑, Arial, Verdana, sans-serif' }
     };
     return theme;
-});define('echarts/theme/infographic', [], function () {
+});define('rich-echarts/theme/infographic', [], function () {
     var theme = {
         color: [
             '#C1232B',
@@ -13221,7 +13221,7 @@ define('zrender/zrender', [
         }
     };
     return easing;
-});define('echarts/chart/base', [
+});define('rich-echarts/chart/base', [
     'require',
     'zrender/shape/Image',
     '../util/shape/Icon',
@@ -14442,7 +14442,7 @@ define('zrender/zrender', [
     };
     require('../tool/util').inherits(Circle, Base);
     return Circle;
-});define('echarts/util/accMath', [], function () {
+});define('rich-echarts/util/accMath', [], function () {
     function accDiv(arg1, arg2) {
         var s1 = arg1.toString();
         var s2 = arg2.toString();
@@ -14494,7 +14494,7 @@ define('zrender/zrender', [
         accAdd: accAdd,
         accSub: accSub
     };
-});define('echarts/util/shape/Icon', [
+});define('rich-echarts/util/shape/Icon', [
     'require',
     'zrender/tool/util',
     'zrender/shape/Star',
@@ -14983,7 +14983,7 @@ define('zrender/zrender', [
     };
     zrUtil.inherits(Icon, Base);
     return Icon;
-});define('echarts/util/shape/MarkLine', [
+});define('rich-echarts/util/shape/MarkLine', [
     'require',
     'zrender/shape/Base',
     './Icon',
@@ -15144,7 +15144,7 @@ define('zrender/zrender', [
     };
     zrUtil.inherits(MarkLine, Base);
     return MarkLine;
-});define('echarts/util/shape/Symbol', [
+});define('rich-echarts/util/shape/Symbol', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/Polygon',
@@ -15389,7 +15389,7 @@ define('zrender/zrender', [
     };
     require('../tool/util').inherits(ShapeBundle, Base);
     return ShapeBundle;
-});define('echarts/util/ecAnimation', [
+});define('rich-echarts/util/ecAnimation', [
     'require',
     'zrender/tool/util',
     'zrender/tool/curve',
@@ -15767,7 +15767,7 @@ define('zrender/zrender', [
         line: line,
         markline: markline
     };
-});define('echarts/util/ecEffect', [
+});define('rich-echarts/util/ecEffect', [
     'require',
     '../util/ecData',
     'zrender/shape/Circle',
@@ -16096,7 +16096,7 @@ define('zrender/zrender', [
         line: line,
         largeLine: largeLine
     };
-});define('echarts/component/base', [
+});define('rich-echarts/component/base', [
     'require',
     '../config',
     '../util/ecData',
@@ -16270,7 +16270,7 @@ define('zrender/zrender', [
         numAddCommas: number.addCommas
     };
     return Base;
-});define('echarts/layout/EdgeBundling', [
+});define('rich-echarts/layout/EdgeBundling', [
     'require',
     '../data/KDTree',
     'zrender/tool/vector'
@@ -17147,7 +17147,7 @@ define('zrender/zrender', [
     };
     require('../tool/util').inherits(Polygon, Base);
     return Polygon;
-});define('echarts/util/shape/normalIsCover', [], function () {
+});define('rich-echarts/util/shape/normalIsCover', [], function () {
     return function (x, y) {
         var originPos = this.transformCoordToLocal(x, y);
         x = originPos[0];
@@ -17272,7 +17272,7 @@ define('zrender/zrender', [
         }
         return cps;
     };
-});define('echarts/util/ecQuery', [
+});define('rich-echarts/util/ecQuery', [
     'require',
     'zrender/tool/util'
 ], function (require) {
@@ -17325,7 +17325,7 @@ define('zrender/zrender', [
         deepQuery: deepQuery,
         deepMerge: deepMerge
     };
-});define('echarts/util/number', [], function () {
+});define('rich-echarts/util/number', [], function () {
     function _trim(str) {
         return str.replace(/^\s+/, '').replace(/\s+$/, '');
     }
@@ -17370,7 +17370,7 @@ define('zrender/zrender', [
         parseRadius: parseRadius,
         addCommas: addCommas
     };
-});define('echarts/data/KDTree', [
+});define('rich-echarts/data/KDTree', [
     'require',
     './quickSelect'
 ], function (require) {
@@ -17532,7 +17532,7 @@ define('zrender/zrender', [
         return output;
     };
     return KDTree;
-});define('echarts/data/quickSelect', ['require'], function (require) {
+});define('rich-echarts/data/quickSelect', ['require'], function (require) {
     function defaultCompareFunc(a, b) {
         return a - b;
     }
@@ -17579,7 +17579,7 @@ define('zrender/zrender', [
         return select(list, left, right, nth, compareFunc);
     }
     return quickSelect;
-});define('echarts/component/dataView', [
+});define('rich-echarts/component/dataView', [
     'require',
     './base',
     '../config',
@@ -17599,7 +17599,7 @@ define('zrender/zrender', [
         this._hasShow = false;
         this._zrHeight = zr.getHeight();
         this._zrWidth = zr.getWidth();
-        this._tDom.className = 'echarts-dataview';
+        this._tDom.className = 'rich-echarts-dataview';
         this.hide();
         this.dom.firstChild.appendChild(this._tDom);
         if (window.addEventListener) {
@@ -17892,7 +17892,7 @@ define('zrender/zrender', [
     zrUtil.inherits(DataView, Base);
     require('../component').define('dataView', DataView);
     return DataView;
-});define('echarts/util/shape/Cross', [
+});define('rich-echarts/util/shape/Cross', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/Line',
@@ -18007,7 +18007,7 @@ define('zrender/zrender', [
     };
     require('../tool/util').inherits(Sector, Base);
     return Sector;
-});define('echarts/util/shape/Candle', [
+});define('rich-echarts/util/shape/Candle', [
     'require',
     'zrender/shape/Base',
     'zrender/tool/util',
@@ -18173,7 +18173,7 @@ define('zrender/zrender', [
     computeBoundingBox.quadraticBezier = computeQuadraticBezierBoundingBox;
     computeBoundingBox.arc = computeArcBoundingBox;
     return computeBoundingBox;
-});define('echarts/util/shape/Chain', [
+});define('rich-echarts/util/shape/Chain', [
     'require',
     'zrender/shape/Base',
     './Icon',
@@ -18336,7 +18336,7 @@ define('zrender/zrender', [
     };
     require('../tool/util').inherits(Ring, Base);
     return Ring;
-});define('echarts/component/axis', [
+});define('rich-echarts/component/axis', [
     'require',
     './base',
     'zrender/shape/Line',
@@ -18570,7 +18570,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Axis, Base);
     require('../component').define('axis', Axis);
     return Axis;
-});define('echarts/component/grid', [
+});define('rich-echarts/component/grid', [
     'require',
     './base',
     'zrender/shape/Rectangle',
@@ -18704,7 +18704,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Grid, Base);
     require('../component').define('grid', Grid);
     return Grid;
-});define('echarts/component/dataZoom', [
+});define('rich-echarts/component/dataZoom', [
     'require',
     './base',
     'zrender/shape/Rectangle',
@@ -19563,7 +19563,7 @@ define('zrender/zrender', [
     zrUtil.inherits(DataZoom, Base);
     require('../component').define('dataZoom', DataZoom);
     return DataZoom;
-});define('echarts/component/categoryAxis', [
+});define('rich-echarts/component/categoryAxis', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -20108,7 +20108,7 @@ define('zrender/zrender', [
     zrUtil.inherits(CategoryAxis, Base);
     require('../component').define('categoryAxis', CategoryAxis);
     return CategoryAxis;
-});define('echarts/component/valueAxis', [
+});define('rich-echarts/component/valueAxis', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -20758,7 +20758,7 @@ define('zrender/zrender', [
     zrUtil.inherits(ValueAxis, Base);
     require('../component').define('valueAxis', ValueAxis);
     return ValueAxis;
-});define('echarts/util/date', [], function () {
+});define('rich-echarts/util/date', [], function () {
     var _timeGap = [
         {
             formatter: 'hh : mm : ss',
@@ -20932,7 +20932,7 @@ define('zrender/zrender', [
         nextNthOnHalfYear: nextNthOnHalfYear,
         nextNthOnYear: nextNthOnYear
     };
-});define('echarts/util/smartSteps', [], function () {
+});define('rich-echarts/util/smartSteps', [], function () {
     var mySteps = [
         10,
         20,
@@ -21369,7 +21369,7 @@ define('zrender/zrender', [
         return makeResult(expMin.c, expMax.c, reference.secs, expSpan.e);
     }
     return smartSteps;
-});define('echarts/chart/line', [
+});define('rich-echarts/chart/line', [
     'require',
     './base',
     'zrender/shape/Polyline',
@@ -22141,7 +22141,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Line, ChartBase);
     require('../chart').define('line', Line);
     return Line;
-});define('echarts/util/shape/HalfSmoothPolygon', [
+});define('rich-echarts/util/shape/HalfSmoothPolygon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/util/smoothBezier',
@@ -22185,7 +22185,7 @@ define('zrender/zrender', [
     };
     zrUtil.inherits(HalfSmoothPolygon, Base);
     return HalfSmoothPolygon;
-});define('echarts/chart/bar', [
+});define('rich-echarts/chart/bar', [
     'require',
     './base',
     'zrender/shape/Rectangle',
@@ -22832,7 +22832,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Bar, ChartBase);
     require('../chart').define('bar', Bar);
     return Bar;
-});define('echarts/chart/scatter', [
+});define('rich-echarts/chart/scatter', [
     'require',
     './base',
     '../util/shape/Symbol',
@@ -23181,7 +23181,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Scatter, ChartBase);
     require('../chart').define('scatter', Scatter);
     return Scatter;
-});define('echarts/component/dataRange', [
+});define('rich-echarts/component/dataRange', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -24388,7 +24388,7 @@ define('zrender/zrender', [
     zrUtil.inherits(DataRange, Base);
     require('../component').define('dataRange', DataRange);
     return DataRange;
-});define('echarts/util/shape/HandlePolygon', [
+});define('rich-echarts/util/shape/HandlePolygon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/Polygon',
@@ -24419,7 +24419,7 @@ define('zrender/zrender', [
     };
     zrUtil.inherits(HandlePolygon, Base);
     return HandlePolygon;
-});define('echarts/chart/k', [
+});define('rich-echarts/chart/k', [
     'require',
     './base',
     '../util/shape/Candle',
@@ -24743,7 +24743,7 @@ define('zrender/zrender', [
     zrUtil.inherits(K, ChartBase);
     require('../chart').define('k', K);
     return K;
-});define('echarts/chart/pie', [
+});define('rich-echarts/chart/pie', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -25488,7 +25488,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Pie, ChartBase);
     require('../chart').define('pie', Pie);
     return Pie;
-});define('echarts/chart/radar', [
+});define('rich-echarts/chart/radar', [
     'require',
     './base',
     'zrender/shape/Polygon',
@@ -25738,7 +25738,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Radar, ChartBase);
     require('../chart').define('radar', Radar);
     return Radar;
-});define('echarts/component/polar', [
+});define('rich-echarts/component/polar', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -26408,7 +26408,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Polar, Base);
     require('../component').define('polar', Polar);
     return Polar;
-});define('echarts/util/coordinates', [
+});define('rich-echarts/util/coordinates', [
     'require',
     'zrender/tool/math'
 ], function (require) {
@@ -26429,7 +26429,7 @@ define('zrender/zrender', [
         polar2cartesian: polar2cartesian,
         cartesian2polar: cartesian2polar
     };
-});define('echarts/chart/chord', [
+});define('rich-echarts/chart/chord', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -27265,7 +27265,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Chord, ChartBase);
     require('../chart').define('chord', Chord);
     return Chord;
-});define('echarts/util/shape/Ribbon', [
+});define('rich-echarts/util/shape/Ribbon', [
     'require',
     'zrender/shape/Base',
     'zrender/shape/util/PathProxy',
@@ -27328,7 +27328,7 @@ define('zrender/zrender', [
     };
     zrUtil.inherits(RibbonShape, Base);
     return RibbonShape;
-});define('echarts/data/Graph', [
+});define('rich-echarts/data/Graph', [
     'require',
     'zrender/tool/util'
 ], function (require) {
@@ -27588,7 +27588,7 @@ define('zrender/zrender', [
         return graph;
     };
     return Graph;
-});define('echarts/layout/Chord', ['require'], function (require) {
+});define('rich-echarts/layout/Chord', ['require'], function (require) {
     var ChordLayout = function (opts) {
         opts = opts || {};
         this.sort = opts.sort || null;
@@ -27684,7 +27684,7 @@ define('zrender/zrender', [
         return a.size - b.size;
     };
     return ChordLayout;
-});define('echarts/chart/force', [
+});define('rich-echarts/chart/force', [
     'require',
     './base',
     '../data/Graph',
@@ -28341,7 +28341,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Force, ChartBase);
     require('../chart').define('force', Force);
     return Force;
-});define('echarts/layout/Force', [
+});define('rich-echarts/layout/Force', [
     'require',
     './forceLayoutWorker',
     'zrender/tool/vector'
@@ -28538,10 +28538,10 @@ define('zrender/zrender', [
         this._layout = null;
     };
     return ForceLayout;
-});define('echarts/layout/forceLayoutWorker', [
+});define('rich-echarts/layout/forceLayoutWorker', [
     'require',
     'zrender/tool/vector'
-], function __echartsForceLayoutWorker(require) {
+], function __rich-echartsForceLayoutWorker(require) {
     'use strict';
     var vec2;
     var inWorker = typeof window === 'undefined' && typeof require === 'undefined';
@@ -29050,7 +29050,7 @@ define('zrender/zrender', [
         this.bbox[3] = maxY;
     };
     ForceLayout.getWorkerCode = function () {
-        var str = __echartsForceLayoutWorker.toString();
+        var str = __rich-echartsForceLayoutWorker.toString();
         return str.slice(str.indexOf('{') + 1, str.lastIndexOf('return'));
     };
     if (inWorker) {
@@ -29108,7 +29108,7 @@ define('zrender/zrender', [
         };
     }
     return ForceLayout;
-});define('echarts/chart/map', [
+});define('rich-echarts/chart/map', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -30714,7 +30714,7 @@ define('zrender/zrender', [
     };
     require('../tool/util').inherits(Ellipse, Base);
     return Ellipse;
-});define('echarts/component/roamController', [
+});define('rich-echarts/component/roamController', [
     'require',
     './base',
     'zrender/shape/Rectangle',
@@ -31009,7 +31009,7 @@ define('zrender/zrender', [
     zrUtil.inherits(RoamController, Base);
     require('../component').define('roamController', RoamController);
     return RoamController;
-});define('echarts/util/mapData/params', ['require'], function (require) {
+});define('rich-echarts/util/mapData/params', ['require'], function (require) {
     function decode(json) {
         if (!json.UTF8Encoding) {
             return json;
@@ -31656,7 +31656,7 @@ define('zrender/zrender', [
         decode: decode,
         params: mapParams
     };
-});define('echarts/util/mapData/textFixed', [], function () {
+});define('rich-echarts/util/mapData/textFixed', [], function () {
     return {
         '广东': [
             0,
@@ -31719,7 +31719,7 @@ define('zrender/zrender', [
             20
         ]
     };
-});define('echarts/util/mapData/geoCoord', [], function () {
+});define('rich-echarts/util/mapData/geoCoord', [], function () {
     return {
         'Russia': [
             100,
@@ -31730,7 +31730,7 @@ define('zrender/zrender', [
             38
         ]
     };
-});define('echarts/util/projection/svg', [
+});define('rich-echarts/util/projection/svg', [
     'require',
     'zrender/shape/Path'
 ], function (require) {
@@ -31965,7 +31965,7 @@ define('zrender/zrender', [
         pos2geo: pos2geo,
         geo2pos: geo2pos
     };
-});define('echarts/util/projection/normal', [], function () {
+});define('rich-echarts/util/projection/normal', [], function () {
     function getBbox(json, specialArea) {
         specialArea = specialArea || {};
         if (!json.srcSize) {
@@ -32226,7 +32226,7 @@ define('zrender/zrender', [
         pos2geo: pos2geo,
         geo2pos: geo2pos
     };
-});define('echarts/util/mapData/geoJson/an_hui_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/an_hui_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -32600,7 +32600,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/ao_men_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/ao_men_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [{
@@ -32625,7 +32625,7 @@ define('zrender/zrender', [
             }],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/bei_jing_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/bei_jing_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -33010,7 +33010,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/china_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/china_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -33715,7 +33715,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/chong_qing_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/chong_qing_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -34522,7 +34522,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/fu_jian_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/fu_jian_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -34709,7 +34709,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/gan_su_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/gan_su_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -35014,7 +35014,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/guang_dong_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/guang_dong_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -35450,7 +35450,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/guang_xi_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/guang_xi_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -35737,7 +35737,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/gui_zhou_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/gui_zhou_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -35969,7 +35969,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hai_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hai_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -36336,7 +36336,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hei_long_jiang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hei_long_jiang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -36603,7 +36603,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/he_bei_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/he_bei_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -36839,7 +36839,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/he_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/he_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -37186,7 +37186,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hu_bei_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hu_bei_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -37551,7 +37551,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/hu_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/hu_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -37847,7 +37847,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/jiang_su_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/jiang_su_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -38114,7 +38114,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/jiang_xi_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/jiang_xi_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -38341,7 +38341,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/ji_lin_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/ji_lin_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -38528,7 +38528,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/liao_ning_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/liao_ning_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -38815,7 +38815,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/nei_meng_gu_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/nei_meng_gu_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -39062,7 +39062,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/ning_xia_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/ning_xia_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -39178,7 +39178,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/qing_hai_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/qing_hai_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -39354,7 +39354,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shang_hai_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shang_hai_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -39741,7 +39741,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shan_dong_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shan_dong_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -40088,7 +40088,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shan_xi_1_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shan_xi_1_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -40295,7 +40295,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/shan_xi_2_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/shan_xi_2_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -40522,7 +40522,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/si_chuan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/si_chuan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -40949,7 +40949,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/tai_wan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/tai_wan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [{
@@ -40974,7 +40974,7 @@ define('zrender/zrender', [
             }],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/tian_jin_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/tian_jin_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -41341,7 +41341,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/world_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/world_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'offset': {
@@ -44284,7 +44284,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/xiang_gang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/xiang_gang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [{
@@ -44309,7 +44309,7 @@ define('zrender/zrender', [
             }],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/xin_jiang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/xin_jiang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -44730,7 +44730,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/xi_zang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/xi_zang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -44877,7 +44877,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/yun_nan_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/yun_nan_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -45204,7 +45204,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/util/mapData/geoJson/zhe_jiang_geo', [], function () {
+});define('rich-echarts/util/mapData/geoJson/zhe_jiang_geo', [], function () {
     return {
         'type': 'FeatureCollection',
         'features': [
@@ -45431,7 +45431,7 @@ define('zrender/zrender', [
         ],
         'UTF8Encoding': true
     };
-});define('echarts/chart/gauge', [
+});define('rich-echarts/chart/gauge', [
     'require',
     './base',
     '../util/shape/GaugePointer',
@@ -45957,7 +45957,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Gauge, ChartBase);
     require('../chart').define('gauge', Gauge);
     return Gauge;
-});define('echarts/util/shape/GaugePointer', [
+});define('rich-echarts/util/shape/GaugePointer', [
     'require',
     'zrender/shape/Base',
     'zrender/tool/util',
@@ -46005,7 +46005,7 @@ define('zrender/zrender', [
     };
     zrUtil.inherits(GaugePointer, Base);
     return GaugePointer;
-});define('echarts/chart/funnel', [
+});define('rich-echarts/chart/funnel', [
     'require',
     './base',
     'zrender/shape/Text',
@@ -46557,7 +46557,7 @@ define('zrender/zrender', [
     zrUtil.inherits(Funnel, ChartBase);
     require('../chart').define('funnel', Funnel);
     return Funnel;
-});define('echarts/chart/eventRiver', [
+});define('rich-echarts/chart/eventRiver', [
     'require',
     './base',
     '../layout/eventRiver',
@@ -46776,7 +46776,7 @@ define('zrender/zrender', [
     zrUtil.inherits(EventRiver, ChartBase);
     require('../chart').define('eventRiver', EventRiver);
     return EventRiver;
-});define('echarts/layout/eventRiver', ['require'], function (require) {
+});define('rich-echarts/layout/eventRiver', ['require'], function (require) {
     function eventRiverLayout(series, intervalX, area) {
         var space = 5;
         var scale = intervalX;
@@ -46955,41 +46955,41 @@ zrender.animation = {
     Cip : require('zrender/animation/Clip'),
     easing : require('zrender/animation/easing')
 }
-var echarts = require('echarts');
-echarts.config = require('echarts/config');
+var rich-echarts = require('rich-echarts');
+rich-echarts.config = require('rich-echarts/config');
 
-echarts.util = {
+rich-echarts.util = {
     mapData : {
-        params : require('echarts/util/mapData/params')
+        params : require('rich-echarts/util/mapData/params')
     }
 }
 
 
-require("echarts/chart/line");
+require("rich-echarts/chart/line");
 
-require("echarts/chart/bar");
+require("rich-echarts/chart/bar");
 
-require("echarts/chart/scatter");
+require("rich-echarts/chart/scatter");
 
-require("echarts/chart/k");
+require("rich-echarts/chart/k");
 
-require("echarts/chart/pie");
+require("rich-echarts/chart/pie");
 
-require("echarts/chart/radar");
+require("rich-echarts/chart/radar");
 
-require("echarts/chart/chord");
+require("rich-echarts/chart/chord");
 
-require("echarts/chart/force");
+require("rich-echarts/chart/force");
 
-require("echarts/chart/map");
+require("rich-echarts/chart/map");
 
-require("echarts/chart/gauge");
+require("rich-echarts/chart/gauge");
 
-require("echarts/chart/funnel");
+require("rich-echarts/chart/funnel");
 
-require("echarts/chart/eventRiver");
+require("rich-echarts/chart/eventRiver");
 
-_global['echarts'] = echarts;
+_global['rich-echarts'] = rich-echarts;
 _global['zrender'] = zrender;
 
 })(window);

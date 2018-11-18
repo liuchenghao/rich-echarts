@@ -1,7 +1,7 @@
 /**
  * K-Dimension Tree
  *
- * @module echarts/data/KDTree
+ * @module rich-echarts/data/KDTree
  * @author Yi Shen(https://github.com/pissang)
  */
 define(function (require) {
@@ -18,7 +18,7 @@ define(function (require) {
 
     /**
      * @constructor
-     * @alias module:echarts/data/KDTree
+     * @alias module:rich-echarts/data/KDTree
      * @param {Array} points List of points.
      * each point needs an array property to repesent the actual data
      * @param {Number} [dimension]

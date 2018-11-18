@@ -1,4 +1,4 @@
-define('echarts/chart/k', [
+define('rich-echarts/chart/k', [
     'require',
     './base',
     '../util/shape/Candle',
